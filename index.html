@@ -47,10 +47,9 @@
   </a-entity>
 
   <a-sphere class="collidable" cursor-listener position="6 3 -5 " sound__1="on: mouseenter; src: #blip1;"
-            sound__2="on: click; src: #blip1;"></a-sphere>
-
-  <!--<a-sphere class="collidable" cursor-listener position="-4 3 0 " sound__1="on: mouseenter; src: #blip1;"-->
-            <!--sound__2="on: click; src: #blip1;"></a-sphere>-->
+            sound__2="on: click; src: #blip1;" visible="true">
+    <a-animation attribute="visible" begin="fade" to="false"></a-animation>
+  </a-sphere>
 
   <a-entity obj-model="obj: #Pyramid-obj; mtl: #Pyramid-mtl" position="0 0 -20">
     <a-animation attribute="rotation" dur="5000" to="0 360 0" repeat="indefinite"></a-animation>

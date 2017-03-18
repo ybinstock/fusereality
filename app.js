@@ -1,12 +1,15 @@
 AFRAME.registerComponent('cursor-listener', {
   init: function() {
     this.el.addEventListener('click', function(evt) {
-      console.log('I was clicked at: ', evt.detail.intersection.point);
       document.querySelector('[light]').emit('fade');
       document.querySelector('[light]').emit('fade2');
       document.querySelector(".black-sky").emit('fade');
       document.querySelector(".white-sky").emit('fade');
 
+
+      document.querySelector('[sphere]').removeEventListener('cursor-listener', evt);
+
+      //document.querySelector('[sphere]').setAttribute( 'visible', 'false');
 
       //document.querySelector(".black-sky").setAttribute( 'visibility', false);
       //document.querySelector(".white-sky").setAttribute( 'visibility', true);
