@@ -12,7 +12,10 @@
     src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Exo%202%20Black_Regular.js"></script>
   <script
     src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Exo%202_Bold%20Italic.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="app.js"></script>
 </head>
+
 <body>
 <a-scene>
   <a-assets>
@@ -22,40 +25,60 @@
          crossorigin="anonymous">
     <img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg"
          crossorigin="anonymous" />
-    <a-mixin id="pulse" attribute="material.color" from="#FDFBDA" to="#2D4659" dur="8000"
-             begin="pulse"></a-mixin>
 
     <a-asset-item id="Pyramid-obj" src="Pyramid.obj"></a-asset-item>
     <a-asset-item id="Pyramid-mtl" src="Pyramid.mtl"></a-asset-item>
+
+    <audio id="blip1" src="Feel_The_Funk.mp3"></audio>
+
   </a-assets>
 
-  <!--<a-entity scale="2 2 2" geometry="primitive: torusKnot;" position="0 6 -10"-->
-            <!--material="color: magenta; metalness:1; roughness: 0.1; sphericalEnvMap: #sky;">-->
-    <!--<a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite"></a-animation>-->
-  <!--</a-entity>-->
 
-  <a-entity position="4.5 1 -7" mixin="box">
-    <a-animation mixin="pulse"></a-animation>
+  <a-entity position="0 .6 3">
+    <a-camera camera class="camera" collider-check>
+      <a-entity raycaster="far: .3; objects: .collidable" cursor="fuse: true; fuseTimeout: 100"
+                position="0 0 -0.75"></a-entity>
+
+      <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;" material="color: #CCC; shader: flat;">
+      </a-entity>
+
+    </a-camera>
   </a-entity>
+
+  <a-sphere class="collidable" cursor-listener position="6 3 -5 " sound__1="on: mouseenter; src: #blip1;"
+            sound__2="on: click; src: #blip1;"></a-sphere>
+
+  <!--<a-sphere class="collidable" cursor-listener position="-4 3 0 " sound__1="on: mouseenter; src: #blip1;"-->
+            <!--sound__2="on: click; src: #blip1;"></a-sphere>-->
 
   <a-entity obj-model="obj: #Pyramid-obj; mtl: #Pyramid-mtl" position="0 0 -20">
-    <a-animation easing="linear" attribute="rotation" dur="10000" to="0 360 0" repeat="indefinite"></a-animation>
-    <a-animation mixin="pulse"></a-animation>
-
+    <a-animation attribute="rotation" dur="5000" to="0 360 0" repeat="indefinite"></a-animation>
   </a-entity>
 
 
+  <a-light color="gold" intensity="4.5" type="point" position="5 10 -5">
 
+    <a-animation attribute="color" dur="1000" direction="alternate" from="#551A8B"
+                 to="#00ff00" repeat="indefinite" begin="fade"></a-animation>
+    <a-animation attribute="color" dur="1000" direction="alternate" from="#ff0000"
+                 to="#C2C45B" repeat="indefinite" begin="fade2" delay="500"></a-animation>
+  </a-light>
+
+  <a-sky class="black-sky" color="black" rotation="0 -90 0" visible="true">
+    <a-animation attribute="visible" begin="fade" to="false"></a-animation>
+  </a-sky>
+
+  <a-sky class="white-sky" color="white" rotation="0 -90 0" visible="false">
+    <a-animation attribute="visible" begin="fade" to="true"></a-animation>
+  </a-sky>
+
+
+  <!--ground-->
   <a-entity class="teleportTarget" position="0 0 0"
             geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
-            material="src: #grid; repeat: 10000 10000; transparent: true;metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
+            material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
 
-  <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
-  <a-entity light="color: #ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
-  <a-entity light="color: white; intensity: 0.5" position="-5 5 15"></a-entity>
-  <a-entity light="color: white; type: ambient;"></a-entity>
-
-  <a-sky src="#sky" rotation="0 -90 0"></a-sky>
 
 </a-scene>
 </body>
