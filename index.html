@@ -14,11 +14,16 @@
     src="https://cdn.rawgit.com/AdaRoseEdwards/facetype-fonts-for-a-frame/master/Exo%202_Bold%20Italic.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="app.js"></script>
+  <script src="orbit.js"></script>
+  <script src="look-at-component.js"></script>
+
 </head>
 
 <body>
-<a-scene>
+<a-scene fog="type: linear; density: .05; color: #000000; far: 40; near: 20">
   <a-assets>
+    <a-mixin id="orbit" attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="3000"></a-mixin>
+
     <img id="pink" src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg" crossorigin="anonymous" />
     <img src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" id="grid" crossorigin="anonymous">
     <img src="https://img.gs/bbdkhfbzkk/2048x1024,stretch/http://i.imgur.com/WMNH2OF.jpg" id="chrome"
@@ -30,8 +35,11 @@
     <a-asset-item id="Pyramid-mtl" src="Pyramid.mtl"></a-asset-item>
 
     <audio id="blip1" src="on_you.mp3"></audio>
+    <img id="stars" src="stars.jpg">
 
   </a-assets>
+
+  <a-plane src="#stars" height="100" width="100" rotation="90 0 0" position="0 40 0"></a-plane>
 
 
   <a-entity position="0 .6 3">
@@ -46,17 +54,29 @@
     </a-camera>
   </a-entity>
 
-  <a-sphere class="collidable" cursor-listener position="6 3 -5 " sound__1="on: mouseenter; src: #blip1;"
-            sound__2="on: click; src: #blip1;" visible="true">
-    <a-animation attribute="visible" begin="fade" to="false"></a-animation>
-  </a-sphere>
+  <!--Moon-->
+  <!--<a-sphere class="collidable" cursor-listener position="6 30 -15 " sound__1="on: mouseenter; src: #blip1;"-->
+            <!--sound__2="on: click; src: #blip1;" visible="true" src="moon.png;">-->
+  <!--</a-sphere>-->
 
+  <!--Pyramid-->
   <a-entity obj-model="obj: #Pyramid-obj; mtl: #Pyramid-mtl" position="0 0 -20">
     <a-animation attribute="rotation" dur="5000" to="0 360 0" repeat="indefinite"></a-animation>
   </a-entity>
 
+  <!--Images orbit-->
+  <a-entity position="0 0 0">
+    <a-animation mixin="orbit" dur="220000"></a-animation>
+    <!--<a-image src="img1.jpg" look-at="[camera]" position="9.6 0 -18.7" rotation="0 -90 0" scale="8 8 8"></a-image>-->
+    <a-sphere class="collidable" cursor-listener position="6 30 -15 "
+              sound__1="on: mouseenter; src: #blip1;"
+              sound__2="on: click; src: #blip1;" visible="true" src="moon.png;">
+      <!--<a-animation attribute="visible" begin="fade" to="false"></a-animation>-->
+    </a-sphere>
+  </a-entity>
 
-  <a-light color="gold" intensity="4.5" type="point" position="5 10 -5">
+  <!--Light-->
+  <a-light color="silver" intensity="4.5" type="point" position="5 10 -5">
 
     <a-animation attribute="color" dur="1000" direction="alternate" from="#551A8B"
                  to="#00ff00" repeat="indefinite" begin="fade"></a-animation>
@@ -64,6 +84,7 @@
                  to="#C2C45B" repeat="indefinite" begin="fade2" delay="500"></a-animation>
   </a-light>
 
+  <!--Sky-->
   <a-sky class="black-sky" color="black" rotation="0 -90 0" visible="true">
     <a-animation attribute="visible" begin="fade" to="false"></a-animation>
   </a-sky>
@@ -71,7 +92,6 @@
   <a-sky class="white-sky" color="white" rotation="0 -90 0" visible="false">
     <a-animation attribute="visible" begin="fade" to="true"></a-animation>
   </a-sky>
-
 
   <!--ground-->
   <a-entity class="teleportTarget" position="0 0 0"
