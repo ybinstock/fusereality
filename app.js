@@ -5,7 +5,7 @@ AFRAME.registerComponent('cursor-listener', {
       document.querySelector('[light]').emit('fade2');
       document.querySelector(".black-sky").emit('fade');
       document.querySelector(".white-sky").emit('fade');
-      document.querySelector('[sphere]').removeEventListener('cursor-listener', evt);
+      document.querySelector('.collidable').removeEventListener('cursor-listener', evt);
 
     });
 

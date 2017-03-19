@@ -54,24 +54,17 @@
     </a-camera>
   </a-entity>
 
-  <!--Moon-->
-  <!--<a-sphere class="collidable" cursor-listener position="6 30 -15 " sound__1="on: mouseenter; src: #blip1;"-->
-            <!--sound__2="on: click; src: #blip1;" visible="true" src="moon.png;">-->
-  <!--</a-sphere>-->
-
   <!--Pyramid-->
   <a-entity obj-model="obj: #Pyramid-obj; mtl: #Pyramid-mtl" position="0 0 -20">
     <a-animation attribute="rotation" dur="5000" to="0 360 0" repeat="indefinite"></a-animation>
   </a-entity>
 
-  <!--Images orbit-->
+  <!--Moon-->
   <a-entity position="0 0 0">
     <a-animation mixin="orbit" dur="220000"></a-animation>
-    <!--<a-image src="img1.jpg" look-at="[camera]" position="9.6 0 -18.7" rotation="0 -90 0" scale="8 8 8"></a-image>-->
     <a-sphere class="collidable" cursor-listener position="6 30 -15 "
               sound__1="on: mouseenter; src: #blip1;"
-              sound__2="on: click; src: #blip1;" visible="true" src="moon.png;">
-      <!--<a-animation attribute="visible" begin="fade" to="false"></a-animation>-->
+              sound__2="on: click; src: #blip1;" visible="true" src="moon.png">
     </a-sphere>
   </a-entity>
 
